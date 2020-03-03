@@ -2,10 +2,10 @@ var express = require('express')
 var router = express.Router()
 
 // Controller modules
-var homeController = require('./controllers/homeController')
-var laptopController = require('./controllers/laptopController')
-var brandController = require('./controllers/brandController')
-var typeController = require('./controllers/typeController')
+var homeController = require('../controllers/homeController')
+var laptopController = require('../controllers/laptopController')
+var brandController = require('../controllers/brandController')
+var typeController = require('../controllers/typeController')
 
 router.get('/home', homeController.home)
 
