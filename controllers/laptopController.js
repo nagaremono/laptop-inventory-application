@@ -1,8 +1,104 @@
 var Laptop = require('../models/laptop')
 var Brand = require('../models/brand')
 var Type = require('../models/type')
+var validator = require('express-validator')
 
 var async = require('async')
+
+exports.laptopCreateGET = function(req, res, next) {
+  async.parallel(
+    {
+      brands: function(callback) {
+        Brand.find(callback)
+      },
+      types: function(callback) {
+        Type.find(callback)
+      },
+    },
+    function(err, result) {
+      if (err) return next(err)
+
+      res.render('createLaptop', {
+        title: 'New Laptop',
+        brands: result.brands,
+        types: result.types,
+      })
+    }
+  )
+}
+
+exports.laptopCreatePOST = [
+  validator
+    .body('name', 'Name must not be empty')
+    .trim()
+    .isLength({ min: 1 }),
+  validator
+    .body('brand', 'Brand must not be empty')
+    .trim()
+    .isLength({ min: 1 }),
+  validator
+    .body('type', 'Type must not be empty')
+    .trim()
+    .isLength({ min: 1 }),
+  validator
+    .body('description', 'Description must not be empty')
+    .trim()
+    .isLength({ min: 1, max: 150 }),
+  validator
+    .body('price', 'Price must not be empty')
+    .trim()
+    .isNumeric(),
+  validator
+    .body('number_in_stock', 'Number must not be empty')
+    .trim()
+    .isNumeric(),
+
+  validator.sanitizeBody('*').escape(),
+
+  (req, res, next) => {
+    const errors = validator.validationResult(req)
+
+    var laptop = new Laptop({
+      name: req.body.name,
+      brand: req.body.brand,
+      type: req.body.type,
+      description: req.body.description,
+      price: req.body.price,
+      number_in_stock: req.body.number_in_stock,
+    })
+
+    if (!errors.isEmpty()) {
+      async.parallel(
+        {
+          brands: function(callback) {
+            Brand.find(callback)
+          },
+          types: function(callback) {
+            Type.find(callback)
+          },
+        },
+        function(err, result) {
+          if (err) return next(err)
+
+          res.render('createLaptop', {
+            title: 'New Laptop',
+            brands: result.brands,
+            types: result.types,
+            laptop: laptop,
+            errors: errors.array(),
+          })
+        }
+      )
+      return
+    } else {
+      laptop.save(function(err) {
+        if (err) return next(err)
+
+        res.redirect(laptop.url)
+      })
+    }
+  },
+]
 
 exports.laptopDetail = function(req, res, next) {
   Laptop.findById(req.params.id)

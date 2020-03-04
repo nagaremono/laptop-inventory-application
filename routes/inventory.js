@@ -10,6 +10,8 @@ var typeController = require('../controllers/typeController')
 router.get('/home', homeController.home)
 
 // Laptop controllers
+router.get('/laptop/create', laptopController.laptopCreateGET)
+router.post('/laptop/create', laptopController.laptopCreatePOST)
 router.get('/laptop/:id/', laptopController.laptopDetail)
 router.get('/laptops', laptopController.laptopList)
 

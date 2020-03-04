@@ -1,0 +1,51 @@
+extend layout
+
+block content
+  h1 New Laptop
+
+  form(action='' method="POST")
+    div(class="form-group row")
+      label(for="name" class="col-sm-2 col-form-label") Name
+      div(class="col-sm-10")
+        input(type="text" class="form-control" id="name" name="name" value=(laptop===undefined ? '' : laptop.name))
+    div(class="form-group row")
+      label(for="brand" class="col-sm-2 col-form-label") Brand
+      div(class="col-sm-10")
+        select(class="form-control" name="brand" id="brand")
+          option(selected) Select Brand
+          each brand in brands
+            if laptop
+              option(value=brand._id selected=(brand._id.toString()===laptop.brand || brand._id.toString()===laptop.brand ? 'selected' : false)) #{brand.name}
+            else
+              option(value=brand._id) #{brand.name}
+    div(class="form-group row")
+      label(for="type" class="col-sm-2 col-form-label") Type
+      div(class="col-sm-10")
+        select(class="form-control" name="type" id="type")
+          option(selected) Select Type
+          each typ in types
+            if laptop
+              option(value=typ._id selected=(typ._id.toString()===laptop.brand || typ._id.toString()===laptop.brand ? 'selected' : false)) #{typ.name}
+            else
+              option(value=typ._id) #{typ.name}         
+    div(class="form-group row")
+      label(for="description" class="col-sm-2 col-form-label") Description
+      div(class="col-sm-10")
+        input(type="text" class="form-control" id="description" name="description")
+    div(class="form-group row")
+      label(for="price" class="col-sm-2 col-form-label") Price
+      div(class="col-sm-10")
+        input(type="number" class="form-control" id="price" name="price")
+    div(class="form-group row")
+      label(for="number_in_stock" class="col-sm-2 col-form-label") Number in Stock
+      div(class="col-sm-10")
+        input(type="number" class="form-control" id="number_in_stock" name="number_in_stock")
+    div(class="form-group row")
+      div(class="col-sm-10")
+        button(type="submit" class="btn btn-primary") Add To Inventory
+    
+  
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg
