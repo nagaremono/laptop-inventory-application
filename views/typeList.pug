@@ -1,0 +1,9 @@
+extend layout
+
+block content
+  h1 Type List
+
+  ul 
+    each typ in typeList
+      li
+        a(href=typ.url) #{typ.name}
