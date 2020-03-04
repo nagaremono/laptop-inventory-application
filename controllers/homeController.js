@@ -4,7 +4,7 @@ var Type = require('../models/type')
 
 var async = require('async')
 
-exports.home = function(req, res, next) {
+exports.home = function(req, res) {
   async.parallel(
     {
       laptop: function(callback) {
@@ -18,7 +18,11 @@ exports.home = function(req, res, next) {
       },
     },
     function(err, results) {
-      res.render('home', { data: results, err: err })
+      res.render('home', {
+        title: 'Laptop Inventory',
+        data: results,
+        error: err,
+      })
     }
   )
 }
