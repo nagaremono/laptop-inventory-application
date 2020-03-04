@@ -1,0 +1,8 @@
+extend layout
+
+block content
+  ul
+    each laptop in laptopList
+      li
+        a(href=laptop.url) #{laptop.name}
+        | Number in stock: #{laptop.number_in_stock}

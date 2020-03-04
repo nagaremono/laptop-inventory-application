@@ -1,0 +1,12 @@
+extend layout
+
+block content
+  h1= data.name
+
+  p Brand
+    a(href=data.brand.url) #{data.brand.name}
+  p Type
+    a(href=data.type.url) #{data.type.name}
+  p Description: #{data.description}
+  p Price: #{data.price}
+  p Number in stock: #{data.number_in_stock}
