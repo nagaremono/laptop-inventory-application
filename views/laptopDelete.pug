@@ -1,0 +1,15 @@
+extend layout
+
+block content
+  h1 Delete Laptop
+
+  p Are you sure you want to delete this laptop?
+
+  p Model: #{laptop.name}
+  p Brand: #{laptop.brand.name}
+  p Type: #{laptop.type.name}
+
+  form(method='POST' action='')
+    input.form-control(type='hidden' name='laptopid' required='true' value=laptop._id)
+
+    button.btn.btn-primary(type='submit') Yes

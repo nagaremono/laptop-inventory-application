@@ -123,3 +123,25 @@ exports.laptopList = function(req, res, next) {
     res.render('laptopList', { title: 'Laptop List', laptopList: result })
   })
 }
+
+exports.laptopDeleteGET = function(req, res, next) {
+  Laptop.findById(req.params.id)
+    .populate('type')
+    .populate('brand')
+    .exec(function(err, result) {
+      if (err) return next(err)
+      if (result === null) {
+        res.redirect('/laptops')
+      }
+
+      res.render('laptopDelete', { title: 'Delete Laptop', laptop: result })
+    })
+}
+
+exports.laptopDeletePOST = function(req, res, next) {
+  Laptop.findByIdAndRemove(req.body.laptopid, function deleteLaptop(err) {
+    if (err) return next(err)
+
+    res.redirect('/laptops')
+  })
+}

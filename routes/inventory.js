@@ -12,6 +12,8 @@ router.get('/home', homeController.home)
 // Laptop controllers
 router.get('/laptop/create', laptopController.laptopCreateGET)
 router.post('/laptop/create', laptopController.laptopCreatePOST)
+router.get('/laptop/:id/delete', laptopController.laptopDeleteGET)
+router.post('/laptop/:id/delete', laptopController.laptopDeletePOST)
 router.get('/laptop/:id/', laptopController.laptopDetail)
 router.get('/laptops', laptopController.laptopList)
 
