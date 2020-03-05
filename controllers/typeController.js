@@ -35,6 +35,6 @@ exports.typeList = function(req, res, next) {
   Type.find({}, 'name', function(err, result) {
     if (err) return next(err)
 
-    res.render('typeList', { title: 'Type List', typelist: result })
+    res.render('typeList', { title: 'Type List', typeList: result })
   })
 }

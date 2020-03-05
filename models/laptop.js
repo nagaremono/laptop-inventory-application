@@ -4,8 +4,8 @@ var Schema = mongoose.Schema
 
 var laptopSchema = new Schema({
   name: { type: String, required: true, max: 100 },
-  brand: { type: Schema.Types.ObjectId, ref: 'Brand' },
-  type: { type: Schema.Types.ObjectId, ref: 'Type' },
+  brand: { type: Schema.Types.ObjectId, ref: 'Brand', required: true },
+  type: { type: Schema.Types.ObjectId, ref: 'Type', required: true },
   description: { type: String, required: true, max: 150 },
   price: { type: Number, required: true },
   number_in_stock: { type: Number, required: true },

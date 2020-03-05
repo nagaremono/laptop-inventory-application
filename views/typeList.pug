@@ -4,6 +4,6 @@ block content
   h1 Type List
 
   ul 
-    each typ in typeList
+    each key in typeList
       li
-        a(href=typ.url) #{typ.name}
+        a(href=key.url) #{key.name}
