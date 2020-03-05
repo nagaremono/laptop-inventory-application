@@ -1,7 +1,7 @@
 extend layout
 
 block content
-  h1 New Laptop
+  h1= title
 
   form(action='' method="POST")
     div(class="form-group row")
@@ -15,7 +15,7 @@ block content
           option(selected) Select Brand
           each brand in brands
             if laptop
-              option(value=brand._id selected=(brand._id.toString()===laptop.brand || brand._id.toString()===laptop.brand ? 'selected' : false)) #{brand.name}
+              option(value=brand._id selected=(brand._id.toString()===laptop.brand._id.toString() ? 'selected' : false)) #{brand.name}
             else
               option(value=brand._id) #{brand.name}
     div(class="form-group row")
@@ -25,7 +25,7 @@ block content
           option(selected) Select Type
           each typ in types
             if laptop
-              option(value=typ._id selected=(typ._id.toString()===laptop.brand || typ._id.toString()===laptop.brand ? 'selected' : false)) #{typ.name}
+              option(value=typ._id selected=(typ._id.toString()===laptop.type._id.toString() ? 'selected' : false)) #{typ.name}
             else
               option(value=typ._id) #{typ.name}         
     div(class="form-group row")

@@ -16,6 +16,8 @@ router.get('/laptop/:id/delete', laptopController.laptopDeleteGET)
 router.post('/laptop/:id/delete', laptopController.laptopDeletePOST)
 router.get('/laptop/:id/', laptopController.laptopDetail)
 router.get('/laptops', laptopController.laptopList)
+router.get('/laptop/:id/update', laptopController.laptopUpdateGET)
+router.post('/laptop/:id/update', laptopController.laptopUpdatePOST)
 
 // Brand Controllers
 router.get('/brand/:id', brandController.brandDetail)

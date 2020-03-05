@@ -145,3 +145,114 @@ exports.laptopDeletePOST = function(req, res, next) {
     res.redirect('/laptops')
   })
 }
+
+exports.laptopUpdateGET = function(req, res, next) {
+  async.parallel(
+    {
+      laptop: function(callback) {
+        Laptop.findById(req.params.id)
+          .populate('brand')
+          .populate('type')
+          .exec(callback)
+      },
+      brands: function(callback) {
+        Brand.find(callback)
+      },
+      types: function(callback) {
+        Type.find(callback)
+      },
+    },
+    function(err, result) {
+      if (err) return next(err)
+      if (result === null) {
+        var error = new Error('Not Foung')
+        error.status = 404
+        next(error)
+      }
+
+      res.render('createLaptop', {
+        title: 'Update Laptop',
+        laptop: result.laptop,
+        brands: result.brands,
+        types: result.types,
+      })
+    }
+  )
+}
+
+exports.laptopUpdatePOST = [
+  validator
+    .body('name', 'Name must not be empty')
+    .trim()
+    .isLength({ min: 1 }),
+  validator
+    .body('brand', 'Brand must not be empty')
+    .trim()
+    .isLength({ min: 1 }),
+  validator
+    .body('type', 'Type must not be empty')
+    .trim()
+    .isLength({ min: 1 }),
+  validator
+    .body('description', 'Description must not be empty')
+    .trim()
+    .isLength({ min: 1, max: 150 }),
+  validator
+    .body('price', 'Price must not be empty')
+    .trim()
+    .isNumeric(),
+  validator
+    .body('number_in_stock', 'Number must not be empty')
+    .trim()
+    .isNumeric(),
+
+  validator.sanitizeBody('*').escape(),
+  function(req, res, next) {
+    const errors = validator.validationResult(req)
+
+    var laptop = new Laptop({
+      name: req.body.name,
+      brand: req.body.brand,
+      type: req.body.type,
+      description: req.body.description,
+      price: req.body.price,
+      number_in_stock: req.body.number_in_stock,
+      _id: req.params.id,
+    })
+
+    if (!errors.isEmpty()) {
+      async.parallel(
+        {
+          brands: function(callback) {
+            Brand.find(callback)
+          },
+          types: function(callback) {
+            Type.find(callback)
+          },
+        },
+        function(err, result) {
+          if (err) return next(err)
+          if (result === null) {
+            var error = new Error('Not Foung')
+            error.status = 404
+            next(error)
+          }
+
+          res.render('createLaptop', {
+            title: 'Update Laptop',
+            laptop: laptop,
+            brands: result.brands,
+            types: result.types,
+          })
+        }
+      )
+      return
+    } else {
+      Laptop.findByIdAndUpdate(req.params.id, laptop, function(err) {
+        if (err) return next(err)
+
+        res.redirect(laptop.url)
+      })
+    }
+  },
+]
