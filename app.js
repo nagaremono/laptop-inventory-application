@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index')
 var inventoryRouter = require('./routes/inventory')
 var compression = require('compression')
 var helmet = require('helmet')
+require('dotenv').config()
 
 var app = express()
 
@@ -15,8 +16,7 @@ app.use(helmet())
 
 //Set up mongoose connection
 var mongoose = require('mongoose')
-var dev_db_url =
-  'mongodb+srv://gedip:rawasari135@cluster0-bmkjd.mongodb.net/laptop_inventory?retryWrites=true&w=majority'
+var dev_db_url = process.env.DEV_URL
 var mongoDB = process.env.MONGODB_URI || dev_db_url
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
 var db = mongoose.connection
