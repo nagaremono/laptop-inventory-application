@@ -1,7 +1,7 @@
 var Laptop = require('../models/laptop')
 var Brand = require('../models/brand')
 var Type = require('../models/type')
-var validator = require('express-validator')
+var { body, validationResult } = require('express-validator')
 
 var async = require('async')
 
@@ -28,35 +28,34 @@ exports.laptopCreateGET = function(req, res, next) {
 }
 
 exports.laptopCreatePOST = [
-  validator
-    .body('name', 'Name must not be empty')
+  body('name', 'Name must not be empty')
     .trim()
     .isLength({ min: 1 }),
-  validator
-    .body('brand', 'Brand must not be empty')
+
+  body('brand', 'Brand must not be empty')
     .trim()
     .isLength({ min: 1 }),
-  validator
-    .body('type', 'Type must not be empty')
+
+  body('type', 'Type must not be empty')
     .trim()
     .isLength({ min: 1 }),
-  validator
-    .body('description', 'Description must not be empty')
+
+  body('description', 'Description must not be empty')
     .trim()
     .isLength({ min: 1, max: 150 }),
-  validator
-    .body('price', 'Price must not be empty')
-    .trim()
-    .isNumeric(),
-  validator
-    .body('number_in_stock', 'Number must not be empty')
+
+  body('price', 'Price must not be empty')
     .trim()
     .isNumeric(),
 
-  validator.sanitizeBody('*').escape(),
+  body('number_in_stock', 'Number must not be empty')
+    .trim()
+    .isNumeric(),
+
+  body('*').escape(),
 
   (req, res, next) => {
-    const errors = validator.validationResult(req)
+    const errors = validationResult(req)
 
     var laptop = new Laptop({
       name: req.body.name,
@@ -181,34 +180,29 @@ exports.laptopUpdateGET = function(req, res, next) {
 }
 
 exports.laptopUpdatePOST = [
-  validator
-    .body('name', 'Name must not be empty')
+  body('name', 'Name must not be empty')
     .trim()
     .isLength({ min: 1 }),
-  validator
-    .body('brand', 'Brand must not be empty')
+  body('brand', 'Brand must not be empty')
     .trim()
     .isLength({ min: 1 }),
-  validator
-    .body('type', 'Type must not be empty')
+  body('type', 'Type must not be empty')
     .trim()
     .isLength({ min: 1 }),
-  validator
-    .body('description', 'Description must not be empty')
+  body('description', 'Description must not be empty')
     .trim()
     .isLength({ min: 1, max: 150 }),
-  validator
-    .body('price', 'Price must not be empty')
+  body('price', 'Price must not be empty')
     .trim()
     .isNumeric(),
-  validator
-    .body('number_in_stock', 'Number must not be empty')
+  body('number_in_stock', 'Number must not be empty')
     .trim()
     .isNumeric(),
 
-  validator.sanitizeBody('*').escape(),
+  body('*').escape(),
+
   function(req, res, next) {
-    const errors = validator.validationResult(req)
+    const errors = validationResult(req)
 
     var laptop = new Laptop({
       name: req.body.name,
