@@ -3,7 +3,7 @@ extend layout
 block content
   h1 Type List
 
-  ul 
+  ul(class="list-group")
     each key in typeList
-      li
+      li(class="list-group-item")
         a(href=key.url) #{key.name}

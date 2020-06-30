@@ -1,10 +1,18 @@
 extend layout
 
 block content
-  ul
-    each laptop in laptopList
-      li
-        a(href=laptop.url) #{laptop.name}
-        | Number in stock: #{laptop.number_in_stock}
-  
-  a(href='/laptop/create') Create new laptop
+  div(class="laptoplist container")
+
+    table(class="table")
+      thead(class="thead-dark")
+        tr
+          th(scope="col") Model
+          th(scope="col") Stock
+      tbody
+        each laptop in laptopList
+          tr
+            td
+              a(href=laptop.url) #{laptop.name}
+            td #{laptop.number_in_stock}
+    
+    a(href='/laptop/create') Create new laptop
