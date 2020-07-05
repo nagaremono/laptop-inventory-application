@@ -20,10 +20,14 @@ router.get('/laptop/:id/update', laptopController.laptopUpdateGET)
 router.post('/laptop/:id/update', laptopController.laptopUpdatePOST)
 
 // Brand Controllers
+router.get('/brands/create', brandController.brandCreateGet)
+router.post('/brands/create', brandController.brandCreatePOST)
 router.get('/brand/:id', brandController.brandDetail)
 router.get('/brands', brandController.brandList)
 
 // Type Controllers
+router.get('/types/create', typeController.typeCreateGet)
+router.post('/types/create', typeController.typeCreatePOST)
 router.get('/type/:id', typeController.typeDetail)
 router.get('/types', typeController.typeList)
 

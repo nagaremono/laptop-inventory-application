@@ -1,13 +1,12 @@
 extend layout
 
 block content
-  h1= brand.name
-
-  p= brand.description
-
-  p Their Laptops
-
-  ul
-    each laptop in brandLaptops
-      li
-        a(href=laptop.url) #{laptop.name}
+  div(class="card" style="width: 18rem;")
+    div(class="card-body")
+      h5(class="card-title")= brand.name
+      p(class="card-text") #{brand.description}
+      p Their Laptops
+      ul(class="list-group list-group-flush")
+        each laptop in brandLaptops
+          li(class="list-group-item") 
+            a(href=laptop.url) #{laptop.name}

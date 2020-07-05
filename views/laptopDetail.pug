@@ -1,15 +1,16 @@
 extend layout
 
 block content
-  h1= data.name
-
-  p Brand
-    a(href=data.brand.url) #{data.brand.name}
-  p Type
-    a(href=data.type.url) #{data.type.name}
-  p Description: #{data.description}
-  p Price: #{data.price}
-  p Number in stock: #{data.number_in_stock}
-
-  a(href=(data.url + '/delete')) Delete Laptop
-  a(href=(data.url + '/update')) Update Laptop
+  div(class="card" style="width: 18rem;")
+    div(class="card-body")
+      h5(class="card-title")= data.name
+      p(class="card-text") #{data.description}
+      ul(class="list-group list-group-flush")
+        li(class="list-group-item") Type: 
+          a(href=data.type.url) #{data.type.name}
+        li(class="list-group-item") Price: #{data.price}
+        li(class="list-group-item") Number in stock: #{data.number_in_stock}
+        li(class="list-group-item")
+          a(href=data.brand.url) #{data.brand.name}
+      a(href=(data.url + '/delete') class="card-link") Delete Laptop
+      a(href=(data.url + '/update') class="card-link") Update Laptop

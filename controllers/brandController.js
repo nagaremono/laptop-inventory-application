@@ -1,8 +1,51 @@
 var Laptop = require('../models/laptop')
 var Brand = require('../models/brand')
 var Type = require('../models/type')
+var { body, validationResult } = require('express-validator')
 
 var async = require('async')
+
+exports.brandCreateGet = function(req, res) {
+  res.render('createBrand', {
+    title: 'New Brand',
+  })
+}
+
+exports.brandCreatePOST = [
+  body('name', 'Name must not be empty')
+    .trim()
+    .isLength({ min: 1 }),
+
+  body('description', 'Description must not be empty')
+    .trim()
+    .isLength({ min: 1, max: 150 }),
+
+  body('*').escape(),
+
+  (req, res, next) => {
+    const errors = validationResult(req)
+
+    var brand = new Brand({
+      name: req.body.name,
+      description: req.body.description,
+    })
+
+    if (!errors.isEmpty()) {
+      res.render('createBrand', {
+        title: 'New Brand',
+        brand: brand,
+        errors: errors.array(),
+      })
+      return
+    } else {
+      brand.save(function(err) {
+        if (err) return next(err)
+
+        res.redirect(brand.url)
+      })
+    }
+  },
+]
 
 exports.brandDetail = function(req, res, next) {
   async.parallel(

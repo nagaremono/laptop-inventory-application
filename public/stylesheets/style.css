@@ -28,7 +28,7 @@ a {
 }
 
 main {
-  margin-top: 25px;
+  padding-top: 25px;
   display: flex;
   justify-content: center;
 }
@@ -40,14 +40,23 @@ main {
   min-height: 50vh;
 }
 
-.home {
-  
-}
-
 .home p, .home li {
   font-size: 22px;
 }
 
 .laptoplist {
   width: 80%;
+}
+
+main { 
+  background: url('../image/background.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 82vh;
+}
+
+a {
+  font-weight: 600;
 }
