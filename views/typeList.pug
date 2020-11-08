@@ -3,9 +3,9 @@ extend layout
 block content
   h1 Type List
 
-  ul(class="list-group")
+  ul(class="list-group my-4")
     each key in typeList
-      li(class="list-group-item")
+      li(class="list-group-item" id="list-comp")
         a(href=key.url) #{key.name}
   
-  a(href='/types/create') Add a new type of laptop
+  a(href='/types/create' class="font-weight-bold text-light my-4 input-page") Add a new type of laptop

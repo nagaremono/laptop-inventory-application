@@ -3,9 +3,9 @@ extend layout
 block content
   h1 Brand List
 
-  ul(class="list-group")
+  ul(class="list-group my-4")
     each brand in brandList
-      li(class="list-group-item")
+      li(class="list-group-item" id="list-comp")
         a(href=brand.url) #{brand.name}
   
-  a(href='/brands/create') Add a new brand of laptop
+  a(href='/brands/create' class="font-weight-bold text-light my-4 input-page") Add a new brand of laptop

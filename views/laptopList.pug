@@ -2,8 +2,7 @@ extend layout
 
 block content
   div(class="laptoplist container")
-
-    table(class="table")
+    table(class="table my-4" id="list-comp")
       thead(class="thead-dark")
         tr
           th(scope="col") Model
@@ -14,5 +13,4 @@ block content
             td
               a(href=laptop.url) #{laptop.name}
             td #{laptop.number_in_stock}
-    
-    a(href='/laptop/create') Create new laptop
+    a(href='/laptop/create' class="font-weight-bold text-light my-4 input-page") Create new laptop

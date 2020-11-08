@@ -5,26 +5,22 @@
   list-style-type: none;
 }
 
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #f3f3f3
-}
-
-a {
-  color: #00B7FF;
+html {
+  font-family: 'Roboto Slab', serif;
 }
 
 .header {
   display: flex;
   flex-direction: column;
-  height: 18vh;
+  min-height: 150px;
   justify-content: space-evenly;
   background-color: #004864;
 }
 
 .header h1 {
-  padding-left: 25px;
   color: #f3f3f3;
+  font-family: 'Staatliches', cursive;
+  padding: 10px 20px;
 }
 
 main {
@@ -37,26 +33,23 @@ main {
   width: 80%;
   border: 3px #181818 solid;
   padding: 10px;
-  min-height: 50vh;
+  min-height: 600px;
+  background-color: #28afb0;
 }
 
-.home p, .home li {
-  font-size: 22px;
+.home {
+  font-size: 1.4rem;
 }
 
 .laptoplist {
   width: 80%;
 }
 
-main { 
-  background: url('../image/background.jpg') no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  height: 82vh;
+#list-comp {
+  background-color: #ddcecd;
 }
 
-a {
-  font-weight: 600;
+.input-page {
+  background-color: #e01a4f;
+  padding: 20px;
 }

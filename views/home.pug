@@ -2,11 +2,21 @@ extend layout
 
 block content
   div(class="home")
-    h2 You can browse the inventory based on the laptop model, brand, and type.
-    p Select on the categories to view your inventory, create new entries, update, and remove existing one.
-  
+    h2 Browse inventory per laptop model, brand, and type.
+
     if data
-      ul(class="list-group")
-        li(class="list-group-item") Laptops in inventory: !{data.laptop}
-        li(class="list-group-item") Brands in inventory: !{data.brand}
-        li(class="list-group-item") Types in inventory: !{data.type}
+      table(class="table table-striped table-dark mt-4 w-75 mx-auto")
+        thead
+          tr
+            th(scope="col") Inventory
+            th(scope="col") Quantity
+        tbody
+          tr
+            td Total Laptops
+            td !{data.laptop}
+          tr
+            td Per Brand
+            td !{data.brand}
+          tr
+            td Per type
+            td !{data.type}
